@@ -1,4 +1,4 @@
-# Marionette.Applicationsdf
+# Marionette.Application
 
 The `Backbone.Marionette.Application` object is the hub of your composite
 application. It organizes, initializes and coordinates the various pieces of your
@@ -13,11 +13,11 @@ it to add your own functionality.
 MyApp = new Backbone.Marionette.Application();
 ```
 
-## Documentation Index
+## Docs
 
+* [Starting An Application](#starting-an-application)
 * [Adding Initializers](#adding-initializers)
 * [Application Event](#application-event)
-* [Starting An Application](#starting-an-application)
 * [Messaging Systems](#messaging-systems)
   * [Event Aggregator](#event-aggregator)
   * [Request Response](#request-response)
