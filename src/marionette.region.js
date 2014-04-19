@@ -6,9 +6,8 @@
 // Manage the visual regions of your composite application. See
 // http://lostechies.com/derickbailey/2011/12/12/composite-js-apps-regions-and-region-managers/
 
-Marionette.Region = function(options) {
-  this.options = options || {};
-  this.el = Marionette.getOption(this, 'el');
+Marionette.Region = function() {
+  this.el = _.result(this, 'el');
 
   if (!this.el) {
     throwError('An "el" must be specified for a region.', 'NoElError');

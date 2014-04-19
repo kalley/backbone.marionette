@@ -93,8 +93,8 @@ Marionette.Behaviors = (function(Marionette, _) {
       delegateEvents.apply(this, args);
 
       _.each(behaviors, function(b) {
-        Marionette.bindEntityEvents(b, this.model, Marionette.getOption(b, 'modelEvents'));
-        Marionette.bindEntityEvents(b, this.collection, Marionette.getOption(b, 'collectionEvents'));
+        Marionette.bindEntityEvents(b, this.model, _.result(b, 'modelEvents'));
+        Marionette.bindEntityEvents(b, this.collection, _.result(b, 'collectionEvents'));
       }, this);
     },
 
@@ -103,8 +103,8 @@ Marionette.Behaviors = (function(Marionette, _) {
       undelegateEvents.apply(this, args);
 
       _.each(behaviors, function(b) {
-        Marionette.unbindEntityEvents(this, this.model, Marionette.getOption(b, 'modelEvents'));
-        Marionette.unbindEntityEvents(this, this.collection, Marionette.getOption(b, 'collectionEvents'));
+        Marionette.unbindEntityEvents(this, this.model, _.result(b, 'modelEvents'));
+        Marionette.unbindEntityEvents(this, this.collection, _.result(b, 'collectionEvents'));
       }, this);
     },
 

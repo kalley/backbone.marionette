@@ -10,7 +10,7 @@ Marionette.CollectionView = Marionette.View.extend({
   childViewEventPrefix: 'childview',
 
   // constructor
-  constructor: function(options) {
+  constructor: function() {
     this._initChildViewStorage();
 
     Marionette.View.prototype.constructor.apply(this, arguments);
@@ -140,14 +140,14 @@ Marionette.CollectionView = Marionette.View.extend({
 
   // Retrieve the empty view type
   getEmptyView: function() {
-    return Marionette.getOption(this, 'emptyView');
+    return _.result(this, 'emptyView');
   },
 
-  // Retrieve the childView type, either from `this.options.childView`
-  // or from the `childView` in the object definition. The "options"
+  // Retrieve the childView type, either from `this.childView`
+  // or from the `childView` in the object definition. `this.childView`
   // takes precedence.
   getChildView: function(child) {
-    var childView = Marionette.getOption(this, 'childView');
+    var childView = _.result(this, 'childView');
 
     if (!childView) {
       throwError('A "childView" must be specified', 'NoChildViewError');
@@ -159,7 +159,7 @@ Marionette.CollectionView = Marionette.View.extend({
   // Render the child's view and add it to the
   // HTML for the collection view.
   addChild: function(child, ChildView, index) {
-    var childViewOptions = Marionette.getOption(this, 'childViewOptions');
+    var childViewOptions = _.result(this, 'childViewOptions');
     if (_.isFunction(childViewOptions)) {
       childViewOptions = childViewOptions.call(this, child, index);
     }
@@ -271,7 +271,7 @@ Marionette.CollectionView = Marionette.View.extend({
   // Set up the child view event forwarding. Uses a "childview:"
   // prefix in front of all forwarded events.
   proxyChildEvents: function(view) {
-    var prefix = Marionette.getOption(this, 'childViewEventPrefix');
+    var prefix = _.result(this, 'childViewEventPrefix');
 
     // Forward all child view events through the parent,
     // prepending "childview:" to the event name

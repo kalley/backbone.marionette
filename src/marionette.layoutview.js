@@ -12,13 +12,11 @@ Marionette.LayoutView = Marionette.ItemView.extend({
 
   // Ensure the regions are available when the `initialize` method
   // is called.
-  constructor: function(options) {
-    options = options || {};
-
+  constructor: function() {
     this._firstRender = true;
-    this._initializeRegions(options);
+    this._initializeRegions.apply(this, arguments);
 
-    Marionette.ItemView.prototype.constructor.call(this, options);
+    Marionette.ItemView.prototype.constructor.apply(this, arguments);
   },
 
   // LayoutView's render will use the existing region objects the
@@ -80,7 +78,7 @@ Marionette.LayoutView = Marionette.ItemView.extend({
     var that = this;
 
     var defaults = {
-      regionType: Marionette.getOption(this, 'regionType'),
+      regionType: _.result(this, 'regionType'),
       parentEl: function() { return that.$el; }
     };
 
@@ -89,12 +87,12 @@ Marionette.LayoutView = Marionette.ItemView.extend({
 
   // Internal method to initialize the regions that have been defined in a
   // `regions` attribute on this layoutView.
-  _initializeRegions: function(options) {
+  _initializeRegions: function() {
     var regions;
     this._initRegionManager();
 
     if (_.isFunction(this.regions)) {
-      regions = this.regions(options);
+      regions = this.regions.apply(this, arguments);
     } else {
       regions = this.regions || {};
     }
